@@ -1,7 +1,7 @@
 Cintal Frontend
 Overview
 
-This project utilizes Tailwind CSS along with React Toast to create a user interface with sleek design and interactive notifications.
+This project utilizes Redux, Redux Toolkit, Tailwind CSS along with React Toast to create a user interface with sleek design and interactive notifications.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
