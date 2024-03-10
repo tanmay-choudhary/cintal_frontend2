@@ -8,9 +8,28 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Cookies from "universal-cookie";
+import makeApiCall from "@/utils/makeApiCall";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const cookies = new Cookies();
+  const token = cookies.get("refresh_token");
+  //console.log(token);
+  async function handleLogout() {
+    //console.log(token);
+    try {
+      let response = await makeApiCall("POST", "/auth/logout", {
+        refresh_token: token,
+      });
+      cookies.remove("refresh_token", {
+        path: "/",
+      });
+      router.push("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <Head>
@@ -35,7 +54,14 @@ export default function App({ Component, pageProps }) {
                 />
               </Link>
             </div>
-            <button className="text-white font-medium text-xl">Logout</button>
+            <button
+              onClick={() => {
+                handleLogout();
+              }}
+              className="text-white font-medium text-xl"
+            >
+              Logout
+            </button>
           </div>
         )}
 
